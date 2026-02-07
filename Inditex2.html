@@ -1,0 +1,137 @@
+<!DOCTYPE HTML>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server12</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <nav>
+            <ul>
+                <!-- Navegación por apartados -->
+                <li><a href="javascript:void(0)" onclick="navegarA('seccion-inicio')">Inicio</a></li>
+<li><a href="javascript:void(0)" onclick="navegarA('seccion-juegos')">Juegos</a></li>
+<li><a href="javascript:void(0)" onclick="navegarA('seccion-proxy')">Navegador</a></li>
+<li><a href="javascript:void(0)" onclick="navegarA('seccion-apps')">Aplicaciones</a></li>
+            </ul>
+        </nav>
+    </header>
+    <!-- CONTENIDO DINÁMICO (Sin sub-URLs) -->
+    <main id="contenido-principal">
+      <section id="seccion-apps" class="pagina-seccion">
+    <h2 class="section-title">Aplicaciones de Preferencia</h2>
+    <div class="products-section">
+        <!-- Puedes cambiar las URLs por las apps que prefieras -->
+        <div class="product-card">
+            <h3>Calculadora Científica</h3>
+            <p>Herramienta avanzada de cálculo.</p>
+            <button onclick="abrirAppEnIframe('www.desmos.com')">Ejecutar</button>
+        </div>
+        <div class="product-card">
+            <h3>Editor de Código</h3>
+            <p>Programa en línea rápidamente.</p>
+            <button onclick="abrirAppEnIframe('onecompiler.com')">Ejecutar</button>
+        </div>
+        <div class="product-card">
+            <h3>Traductor</h3>
+            <p>Servicio de traducción integrado.</p>
+            <button onclick="abrirAppEnIframe('www.bing.com')">Ejecutar</button>
+        </div>
+    </div>
+</section>
+        <section id="seccion-inicio" class="pagina-seccion activa">
+    <div class="hero-section">
+        <div class="hero-content">
+            <h1>Bienvenido a Mcmserver</h1>
+            <p>Tu portal educativo y de entretenimiento de última generación.</p>
+            <div class="stats-mini">
+                <span>● Servidores Activos</span> | <span>● Conexión Segura</span>
+            </div>
+        </div>
+    </div>
+</section>
+        <!-- SECCIÓN: JUEGOS -->
+        <<section id="seccion-juegos" class="pagina-seccion">
+    <h2 class="section-title">Catálogo de Juegos</h2>
+    <div class="products-section">
+        <div class="product-card">
+            <div class="badge">Nuevo</div>
+            <h3>Art FullSus</h3>
+            <p>Experiencia de juego fluida sin rastro en historial.</p>
+            <button onclick="window.open('https://art.fullsusmtb.org')">Jugar ahora</button>
+        </div>
+        <div class="product-card">
+            <h3>HistorySpot</h3>
+            <p>Aprende historia mientras te diviertes.</p>
+            <button>Explorar</button>
+        </div>
+        <div class="product-card">
+            <h3>GeometrySpot</h3>
+            <p>Desafía tus habilidades matemáticas.</p>
+            <button>Entrar</button>
+        </div>
+    </div>
+</section>
+            <section class="products-section">
+                <div class="product-item">
+                    <h3><a href="https://art.fullsusmtb.org">Art FullSus</a></h3>
+                    <p>Juega sin dejar rastro en el historial.</p>
+                </div>
+                <div class="product-item">
+                    <h3>HistorySpot</h3>
+                    <p>Contenido educativo interactivo.</p>
+                </div>
+            </section>
+        </section>
+
+        <!-- SECCIÓN: PROXY -->
+        <section id="seccion-proxy" class="pagina-seccion">
+    <div class="proxy-container">
+        <div class="proxy-bar">
+            <div class="nav-controls">
+                <button onclick="proxyBack()" title="Atrás">❮</button>
+                <button onclick="proxyForward()" title="Adelante">❯</button>
+                <button onclick="proxyReload()" title="Recargar">↻</button>
+            </div>
+            <input type="text" id="proxyInput" placeholder="Introduce URL para navegar de forma privada...">
+            <button onclick="cargarProxy()" class="go-btn">Ir</button>
+            <button onclick="toggleFullScreen()" class="fs-btn">⛶</button>
+        </div>
+        <iframe id="proxyFrame" src="about:blank" allowfullscreen></iframe>
+    </div>
+</section>
+        <!-- SECCIÓN: SOPORTE -->
+        <section id="seccion-soporte" class="pagina-seccion">
+            <div class="hero-section">
+                <div class="hero-content">
+                    <h1>Soporte</h1>
+                    <p>¿Tienes dudas? Estamos aquí para ayudarte.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Modales -->
+    <div id="modalGestionUsuarios" class="modal-admin">
+        <div class="modal-content-admin">
+            <span class="cerrar-modal" onclick="cerrarModal('modalGestionUsuarios')">&times;</span>
+            <h3>Gestionar Usuarios</h3>
+            <form id="formAddUser">
+                <input type="text" id="nuevoUsuarioModal" placeholder="Nombre" required>
+                <button type="submit">Añadir</button>
+            </form>
+            <ul id="listaUsuariosModal"></ul>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Server12. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

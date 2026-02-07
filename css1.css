@@ -1,0 +1,579 @@
+/* =======================================================
+   1. VARIABLES CSS (CUSTOM PROPERTIES)
+   ======================================================= */
+:root {
+    /* Paleta de colores principal */
+    --color-dark-bg: #1d1d1f;
+    --color-semi-dark-bg: rgba(29, 29, 31, 0.7);
+    --color-text-light: rgba(255, 255, 255, 0.8);
+    --color-text-white: #fff;
+    --color-blue-accent: #007bff;
+    --color-hover-dark: #333;
+    --color-footer-text: #a1a1a6;
+
+    /* Tamaños */
+    --header-height: 48px;
+    --panel-width-closed: 0;
+    --panel-width-open: 300px;
+    --panel-width-extended: 400px;
+}
+
+/* =======================================================
+   2. ESTILOS GENERALES Y RESET BÁSICO
+   ======================================================= */
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    padding-top: var(--header-height); /* Espacio para el menú fijo */
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+/* =======================================================
+   3. ENCABEZADO Y NAVEGACIÓN (Estilo Apple)
+   ======================================================= */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    backdrop-filter: blur(20px);
+    background-color: var(--color-semi-dark-bg);
+    z-index: 1000;
+}
+
+nav {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0 10px;
+    height: var(--header-height);
+    position: relative;
+}
+
+nav ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+nav ul li a {
+    color: var(--color-text-light);
+    font-size: 14px;
+    transition: color 0.3s ease;
+    padding: 0 8px;
+    display: block;
+}
+
+nav ul li a:hover {
+    color: var(--color-text-white);
+}
+
+nav ul li a svg {
+    display: block;
+}
+
+/* =======================================================
+   4. DROPDOWNS DEL MENÚ PRINCIPAL
+   ======================================================= */
+.menu-item-with-dropdown {
+    position: relative;
+    z-index: 1002;
+}
+
+.dropdown-menu,
+.dropdown-search {
+    display: none;
+    position: absolute;
+    top: 100%;
+    background-color: rgba(29, 29, 31, 0.9);
+    backdrop-filter: blur(20px);
+    padding: 10px 0;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    z-index: 1001;
+}
+
+/* Posicionamiento específico */
+.dropdown-menu {
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 400px;
+}
+
+.dropdown-search {
+    right: 0;
+    width: 300px;
+    padding: 15px;
+}
+
+/* Items del submenú */
+.dropdown-menu li a {
+    padding: 15px 20px;
+    color: var(--color-text-light);
+    text-align: left;
+}
+
+.dropdown-menu li a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--color-text-white);
+}
+
+.dropdown-search input {
+    width: 100%; /* El padding ya está aplicado al padre */
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+/* Muestra el menú desplegable al pasar el cursor (o usar JS para accesibilidad) */
+.menu-item-with-dropdown:hover .dropdown-menu,
+.menu-item-with-dropdown:hover .dropdown-search {
+    display: block;
+}
+
+/* =======================================================
+   5. BOTÓN Y PANEL LATERAL (ADMIN)
+   ======================================================= */
+#adminBtn {
+    position: fixed;
+    top: 5px;
+    right: 20px;
+    padding: 10px 20px;
+    background-color: var(--color-blue-accent);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    z-index: 1999;
+}
+
+.panel-lateral {
+    height: 100%;
+    width: var(--panel-width-closed);
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    right: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: width 0.5s ease; /* Transición solo en width */
+    padding-top: 60px;
+}
+
+.panel-lateral.abierto {
+    width: var(--panel-width-open);
+}
+
+.panel-lateral.extendido {
+    width: var(--panel-width-extended);
+}
+
+.cerrarBtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+    color: white;
+    text-decoration: none;
+}
+
+.mensaje-error {
+    text-align: center;
+    /* Color se maneja con JS (red/green) */
+}
+
+.oculto-post-login {
+    display: none;
+}
+
+/* =======================================================
+   6. FORMULARIOS Y MENÚS DEL PANEL ADMIN
+   ======================================================= */
+.panel-lateral h2 {
+    color: white;
+    text-align: center;
+}
+
+.panel-lateral form {
+    padding: 20px;
+    text-align: center;
+}
+
+/* Estilos de inputs y botones unificados para el panel */
+.panel-lateral input,
+.panel-lateral button,
+.admin-menu button {
+    width: calc(100% - 40px); /* Mantiene el padding en cuenta */
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: none;
+    box-sizing: border-box; /* Importante para que width: 100% funcione con padding */
+}
+
+.panel-lateral input {
+    background-color: white;
+}
+
+.panel-lateral button {
+    background-color: var(--color-blue-accent);
+    color: white;
+}
+
+.admin-menu {
+    /* Estilos base ya definidos por el reset UL */
+}
+
+.dropdown-admin-btn {
+    width: 100%;
+    padding: 15px 20px;
+    background: none;
+    color: white;
+    text-align: left;
+    font-size: 16px;
+    border-bottom: 1px solid var(--color-hover-dark);
+    margin-bottom: 0; /* Anula el margin-bottom general de los botones */
+    border-radius: 0;
+}
+
+.dropdown-admin-btn:hover {
+    background-color: var(--color-hover-dark);
+}
+
+.dropdown-admin-content {
+    display: none;
+}
+
+.dropdown-admin-content.visible {
+    display: block;
+}
+
+.dropdown-admin-content li button {
+    width: 100%;
+    padding: 10px 20px 10px 40px; /* Sangría para sub-items */
+    background-color: #222;
+    color: white;
+    text-align: left;
+    font-size: 14px;
+    margin-bottom: 0;
+    border-radius: 0;
+}
+
+.dropdown-admin-content li button:hover {
+    background-color: #444;
+}
+
+/* =======================================================
+   7. VENTANAS MODALES
+   ======================================================= */
+.modal-admin {
+    display: none;
+    position: fixed;
+    z-index: 1002;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content-admin {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 10px;
+    position: relative;
+    color: #111;
+}
+
+.cerrar-modal {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.cerrar-modal:hover,
+.cerrar-modal:focus {
+    color: black;
+}
+
+/* =======================================================
+   8. CONTENIDO PRINCIPAL (HERO, PRODUCTOS)
+   ======================================================= */
+.hero-section {
+    position: relative;
+    height: 90vh;
+    /* background-image: url('URL_DE_TU_IMAGEN_HERO'); */
+    background-color: #333; /* Color de fallback */
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: var(--header-height);
+}
+
+.hero-content {
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 40px;
+    border-radius: 10px;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem; /* Usando rems para mejor escalabilidad */
+    margin: 0 0 10px 0;
+}
+
+.hero-content p {
+    font-size: 1.5rem;
+    margin: 0 0 20px 0;
+}
+
+.hero-button {
+    background-color: white;
+    color: black;
+    padding: 12px 30px;
+    border-radius: 25px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    display: inline-block; /* Asegura que se comporte como un botón */
+}
+
+.hero-button:hover {
+    background-color: #f0f0f0;
+}
+
+.products-section {
+    display: flex;
+    justify-content: space-around;
+    padding: 50px 20px;
+    /* Uso de linear-gradient como background */
+    background: linear-gradient(to right, #ff7e5f, #feb47b); 
+    text-align: center;
+    gap: 20px; /* Espacio entre productos usando gap moderno */
+}
+
+.product-item {
+    flex-basis: 30%;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.product-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.product-item h3 {
+    font-size: 1.5rem;
+    margin: 0 0 10px 0;
+}
+
+/* =======================================================
+   9. PIE DE PÁGINA (FOOTER)
+   ======================================================= */
+footer {
+    background-color: var(--color-dark-bg);
+    color: var(--color-footer-text);
+    padding: 40px 20px;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-around;
+    max-width: 980px;
+    margin: 0 auto;
+    border-bottom: 1px solid #424245;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    gap: 20px; /* Espacio entre columnas */
+}
+
+.footer-column h4 {
+    color: white;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+/* --- Variables y Reset ya los tienes --- */
+
+/* LÓGICA DE APARTADOS */
+.pagina-seccion {
+    display: none; /* Oculto por defecto */
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.4s ease-in-out;
+}
+
+.pagina-seccion.activa {
+    display: block; /* Solo se muestra la activa */
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Ajustes de Hero para que no choque con el header */
+.hero-section {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #1d1d1f;
+}
+
+/* Mejora de visibilidad del AdminBtn */
+#adminBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 2000;
+    background: var(--color-blue-accent);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* ... Mantener el resto de tu código de paneles y modales ... */
+/* Título de secciones */
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-top: 40px;
+    color: #1d1d1f;
+}
+
+/* Tarjetas de Juegos Renovadas */
+.product-card {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    text-align: left;
+    transition: all 0.3s ease;
+    border: 1px solid #e5e5e7;
+    position: relative;
+}
+
+.product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+.badge {
+    background: #0071e3;
+    color: white;
+    font-size: 10px;
+    padding: 4px 8px;
+    border-radius: 10px;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+/* Contenedor Proxy e Iframe */
+.proxy-container {
+    height: 85vh;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.proxy-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    background: #f5f5f7;
+    padding: 10px;
+    border-radius: 12px;
+}
+
+.proxy-bar input {
+    flex-grow: 1;
+    border: 1px solid #d2d2d7;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+#proxyFrame {
+    flex-grow: 1;
+    border: none;
+    border-radius: 12px;
+    background: white;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+}
+/* Controles del Navegador */
+.nav-controls {
+    display: flex;
+    gap: 5px;
+}
+
+.nav-controls button, .go-btn, .fs-btn {
+    background: #e5e5e7;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+    font-weight: bold;
+}
+
+.nav-controls button:hover, .go-btn:hover {
+    background: #d2d2d7;
+}
+
+.go-btn {
+    background: #0071e3;
+    color: white;
+}
+
+.fs-btn {
+    background: #333;
+    color: white;
+}
+
+/* Animación para el iframe al cargar */
+#proxyFrame {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: #fff;
+    transition: opacity 0.3s;
+}
+
+/* Estilos para Aplicaciones */
+.product-card button {
+    width: 100%;
+    margin-top: 15px;
+    background: #0071e3;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 12px;
+    font-weight: 600;
+}
